@@ -12,6 +12,8 @@ namespace jogos.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<Jogo> Jogos { get; set; }
+        public DbSet<Jogo> Jogos { get; set; } = null!;
+        public DbSet<Usuario> Usuarios { get; set; } = null!;
+        public DbSet<Avaliacao> Avaliacoes { get; set; } = null!;
     }
 }

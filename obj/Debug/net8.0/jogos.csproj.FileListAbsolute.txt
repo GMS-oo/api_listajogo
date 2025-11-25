@@ -104,3 +104,4 @@ C:\Users\gabriel.msilva167\Desktop\jogos\obj\Debug\net8.0\refint\jogos.dll
 C:\Users\gabriel.msilva167\Desktop\jogos\obj\Debug\net8.0\jogos.pdb
 C:\Users\gabriel.msilva167\Desktop\jogos\obj\Debug\net8.0\jogos.genruntimeconfig.cache
 C:\Users\gabriel.msilva167\Desktop\jogos\obj\Debug\net8.0\ref\jogos.dll
+C:\Users\gabriel.msilva167\Desktop\jogos\obj\Debug\net8.0\jogos.sourcelink.json
