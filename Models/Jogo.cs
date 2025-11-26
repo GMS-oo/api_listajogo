@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using System.Collections.Generic;
-
 namespace jogos.Models
 {
     public class Jogo
@@ -15,16 +8,14 @@ namespace jogos.Models
         public string Plataforma { get; set; } = string.Empty;
         public string Descricao { get; set; } = string.Empty;
         public double Nota { get; set; }
-        public double Valor { get; set; }
+        public decimal Valor { get; set; }
+        public string? CapaUrl { get; set; }
 
-        // Cover image URL or local path (ex: /images/elden.jpg)
-        public string CapaUrl { get; set; } = string.Empty;
-
-        // Relacionamento com usuário (opcional: proprietario do jogo)
-        public int? UsuarioId { get; set; } // opcional
+        // FK do usuario dono do jogo
+        public int UsuarioId { get; set; }
         public Usuario? Usuario { get; set; }
 
-        // Avaliações feitas por usuários
+        // Avaliações feitas por varios usuarios
         public List<Avaliacao>? Avaliacoes { get; set; }
     }
 }

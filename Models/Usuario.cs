@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using System.Collections.Generic;
-
 namespace jogos.Models
 {
     public class Usuario
@@ -14,8 +7,10 @@ namespace jogos.Models
         public string Email { get; set; } = string.Empty;
         public string Senha { get; set; } = string.Empty;
 
-        
-        public List<Jogo> Jogos { get; set; } = new();
-        public List<Avaliacao> Avaliacoes { get; set; } = new();
+        // Um usuário pode ter varios jogos cadastrados
+        public List<Jogo>? Jogos { get; set; }
+
+        // Um usuário pode escrever várias avaliações
+        public List<Avaliacao>? Avaliacoes { get; set; }
     }
 }

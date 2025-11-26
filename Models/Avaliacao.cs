@@ -1,22 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace jogos.Models
 {
     public class Avaliacao
     {
         public int Id { get; set; }
+        public string Texto { get; set; } = string.Empty;
+        public double Nota { get; set; }
+        public DateTime CriadoEm { get; set; } = DateTime.Now;
 
-        public int UsuarioId { get; set; }
-        public Usuario Usuario { get; set; } = null!;
-
+        // FK do jogo avaliado
         public int JogoId { get; set; }
-        public Jogo Jogo { get; set; } = null!;
+        public Jogo? Jogo { get; set; }
 
-        public int Nota { get; set; } // 0..10
-        public string? Comentario { get; set; }
-        public DateTime Data { get; set; } = DateTime.UtcNow;
+        // FK do usuario que fez a avaliação
+        public int UsuarioId { get; set; }
+        public Usuario? Usuario { get; set; }
     }
 }
