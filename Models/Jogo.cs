@@ -9,7 +9,7 @@ namespace jogos.Models
         public string Descricao { get; set; } = string.Empty;
         public double Nota { get; set; }
         public decimal Valor { get; set; }
-        public string? CapaUrl { get; set; }
+        public IFormFile CapaUrl { get; set; }
 
         // FK do usuario dono do jogo
         public int UsuarioId { get; set; }

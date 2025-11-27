@@ -11,7 +11,7 @@ using jogos.Data;
 namespace jogos.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251125002546_InitialCreate")]
+    [Migration("20251126225847_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -28,17 +28,18 @@ namespace jogos.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Comentario")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("Data")
+                    b.Property<DateTime>("CriadoEm")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("JogoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Nota")
-                        .HasColumnType("int");
+                    b.Property<double>("Nota")
+                        .HasColumnType("double");
+
+                    b.Property<string>("Texto")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
@@ -58,8 +59,7 @@ namespace jogos.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("CapaUrl")
-                        .IsRequired()
+                    b.Property<IFormFile>("CapaUrl")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Descricao")
@@ -81,11 +81,11 @@ namespace jogos.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("UsuarioId")
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Valor")
-                        .HasColumnType("double");
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(65,30)");
 
                     b.HasKey("Id");
 
@@ -140,7 +140,9 @@ namespace jogos.Migrations
                 {
                     b.HasOne("jogos.Models.Usuario", "Usuario")
                         .WithMany("Jogos")
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Usuario");
                 });

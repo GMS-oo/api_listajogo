@@ -49,10 +49,10 @@ namespace jogos.Migrations
                     Descricao = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Nota = table.Column<double>(type: "double", nullable: false),
-                    Valor = table.Column<double>(type: "double", nullable: false),
-                    CapaUrl = table.Column<string>(type: "longtext", nullable: false)
+                    Valor = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    CapaUrl = table.Column<IFormFile>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UsuarioId = table.Column<int>(type: "int", nullable: true)
+                    UsuarioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,7 +61,8 @@ namespace jogos.Migrations
                         name: "FK_Jogos_Usuarios_UsuarioId",
                         column: x => x.UsuarioId,
                         principalTable: "Usuarios",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -71,12 +72,12 @@ namespace jogos.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
-                    JogoId = table.Column<int>(type: "int", nullable: false),
-                    Nota = table.Column<int>(type: "int", nullable: false),
-                    Comentario = table.Column<string>(type: "longtext", nullable: true)
+                    Texto = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Data = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    Nota = table.Column<double>(type: "double", nullable: false),
+                    CriadoEm = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    JogoId = table.Column<int>(type: "int", nullable: false),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
