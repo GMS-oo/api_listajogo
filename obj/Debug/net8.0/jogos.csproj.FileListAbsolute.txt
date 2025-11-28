@@ -1,5 +1,6 @@
 C:\Users\gabriel.msilva167\Desktop\jogos\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\gabriel.msilva167\Desktop\jogos\bin\Debug\net8.0\appsettings.json
+C:\Users\gabriel.msilva167\Desktop\jogos\bin\Debug\net8.0\jogos.staticwebassets.runtime.json
 C:\Users\gabriel.msilva167\Desktop\jogos\bin\Debug\net8.0\jogos.staticwebassets.endpoints.json
 C:\Users\gabriel.msilva167\Desktop\jogos\bin\Debug\net8.0\jogos.exe
 C:\Users\gabriel.msilva167\Desktop\jogos\bin\Debug\net8.0\jogos.deps.json
@@ -90,6 +91,7 @@ C:\Users\gabriel.msilva167\Desktop\jogos\obj\Debug\net8.0\jogos.AssemblyInfo.cs
 C:\Users\gabriel.msilva167\Desktop\jogos\obj\Debug\net8.0\jogos.csproj.CoreCompileInputs.cache
 C:\Users\gabriel.msilva167\Desktop\jogos\obj\Debug\net8.0\jogos.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\gabriel.msilva167\Desktop\jogos\obj\Debug\net8.0\jogos.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\gabriel.msilva167\Desktop\jogos\obj\Debug\net8.0\jogos.sourcelink.json
 C:\Users\gabriel.msilva167\Desktop\jogos\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\gabriel.msilva167\Desktop\jogos\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\gabriel.msilva167\Desktop\jogos\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
@@ -104,5 +106,3 @@ C:\Users\gabriel.msilva167\Desktop\jogos\obj\Debug\net8.0\refint\jogos.dll
 C:\Users\gabriel.msilva167\Desktop\jogos\obj\Debug\net8.0\jogos.pdb
 C:\Users\gabriel.msilva167\Desktop\jogos\obj\Debug\net8.0\jogos.genruntimeconfig.cache
 C:\Users\gabriel.msilva167\Desktop\jogos\obj\Debug\net8.0\ref\jogos.dll
-C:\Users\gabriel.msilva167\Desktop\jogos\obj\Debug\net8.0\jogos.sourcelink.json
-C:\Users\gabriel.msilva167\Desktop\jogos\bin\Debug\net8.0\jogos.staticwebassets.runtime.json

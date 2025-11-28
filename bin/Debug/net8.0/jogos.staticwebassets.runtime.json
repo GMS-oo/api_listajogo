@@ -1,1 +1,1 @@
-{"ContentRoots":["C:\\Users\\gabriel.msilva167\\Desktop\\jogos\\wwwroot\\"],"Root":{"Children":null,"Asset":null,"Patterns":[{"ContentRootIndex":0,"Pattern":"**","Depth":0}]}}
+{"ContentRoots":["C:\\Users\\gabriel.msilva167\\Desktop\\jogos\\wwwroot\\"],"Root":{"Children":{"capas":{"Children":{"monster-hunter-wilds.png.png":{"Children":null,"Asset":{"ContentRootIndex":0,"SubPath":"capas/monster-hunter-wilds.png.png"},"Patterns":null}},"Asset":null,"Patterns":null}},"Asset":null,"Patterns":[{"ContentRootIndex":0,"Pattern":"**","Depth":0}]}}

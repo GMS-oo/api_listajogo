@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using jogos.Data;
 using jogos.Models;
+using jogos.DTOs;
+using jogos.Services;
 
 namespace jogos.Controllers
 {
@@ -10,63 +12,101 @@ namespace jogos.Controllers
     public class JogosController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly UploadService _uploadService;
 
-        public JogosController(AppDbContext context)
+        public JogosController(AppDbContext context, UploadService uploadService)
         {
             _context = context;
+            _uploadService = uploadService;
         }
 
-        // GET lista todos os jogos
+        // GET api/jogos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Jogo>>> GetJogos()
         {
-            return await _context.Jogos.Include(j => j.Avaliacoes).ToListAsync();
+            return await _context.Jogos.Include(j => j.Usuario).ToListAsync();
         }
 
-        // GET um jogo específico
+        // GET api/jogos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Jogo>> GetJogo(int id)
         {
-            var jogo = await _context.Jogos
-                .Include(j => j.Avaliacoes)
-                .ThenInclude(a => a.Usuario)
-                .FirstOrDefaultAsync(j => j.Id == id);
-
+            var jogo = await _context.Jogos.Include(j => j.Usuario).FirstOrDefaultAsync(j => j.Id == id);
             if (jogo == null) return NotFound();
             return jogo;
         }
 
-        // POST criar jogo
+        // POST api/jogos
         [HttpPost]
-        public async Task<ActionResult<Jogo>> PostJogo(Jogo jogo)
+        public async Task<ActionResult<Jogo>> PostJogo([FromBody] JogoDto dto)
         {
+            var usuario = await _context.Usuarios.FindAsync(dto.UsuarioId);
+            if (usuario == null) return BadRequest("UsuarioId inválido.");
+
+            var jogo = new Jogo
+            {
+                Nome = dto.Nome,
+                Genero = dto.Genero,
+                Plataforma = dto.Plataforma,
+                Descricao = dto.Descricao,
+                Nota = dto.Nota,
+                Valor = dto.Valor,
+                UsuarioId = dto.UsuarioId
+            };
+
             _context.Jogos.Add(jogo);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetJogo), new { id = jogo.Id }, jogo);
         }
 
-        // POST upload da capa
-        [HttpPost("upload-capa")]
-        public async Task<IActionResult> UploadCapa(IFormFile arquivo)
+        // PUT api/jogos/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutJogo(int id, [FromBody] JogoDto dto)
         {
-            if (arquivo == null || arquivo.Length == 0)
-                return BadRequest("Arquivo inválido");
+            var jogo = await _context.Jogos.FindAsync(id);
+            if (jogo == null) return NotFound();
 
-            var pasta = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/capas");
+            jogo.Nome = dto.Nome;
+            jogo.Genero = dto.Genero;
+            jogo.Plataforma = dto.Plataforma;
+            jogo.Descricao = dto.Descricao;
+            jogo.Nota = dto.Nota;
+            jogo.Valor = dto.Valor;
+            jogo.UsuarioId = dto.UsuarioId;
 
-            if (!Directory.Exists(pasta))
-                Directory.CreateDirectory(pasta);
+            _context.Entry(jogo).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
 
-            var caminhoArquivo = Path.Combine(pasta, arquivo.FileName);
+            return NoContent();
+        }
 
-            using (var stream = new FileStream(caminhoArquivo, FileMode.Create))
-            {
-                await arquivo.CopyToAsync(stream);
-            }
+        // DELETE api/jogos/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteJogo(int id)
+        {
+            var jogo = await _context.Jogos.FindAsync(id);
+            if (jogo == null) return NotFound();
 
-            var url = $"/capas/{arquivo.FileName}";
-            return Ok(new { url });
+            _context.Jogos.Remove(jogo);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        // POST api/jogos/{id}/upload-capa
+        [HttpPost("{id}/upload-capa")]
+        public async Task<IActionResult> UploadCapa(int id, [FromForm] UploadCapaDto dto)
+        {
+            var jogo = await _context.Jogos.FindAsync(id);
+            if (jogo == null) return NotFound();
+
+            if (dto.Capa == null) return BadRequest("Arquivo não enviado.");
+
+            var caminho = await _uploadService.SaveCapaAsync(dto.Capa);
+            jogo.CapaUrl = caminho;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { capa = caminho });
         }
     }
 }
