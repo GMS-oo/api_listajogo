@@ -1,3 +1,8 @@
+// Models/Usuario.cs
+
+using System.Text.Json.Serialization; // <--- NOVO USING AQUI
+using System.Collections.Generic;
+
 namespace jogos.Models
 {
     public class Usuario
@@ -7,7 +12,8 @@ namespace jogos.Models
         public string Email { get; set; } = string.Empty;
         public string Senha { get; set; } = string.Empty;
 
-        // Um usuário pode ter vários jogos cadastrados
+        // Adicionando [JsonIgnore] para evitar o ciclo infinito
+        [JsonIgnore] // <--- ADICIONE ESTA LINHA AQUI
         public List<Jogo>? Jogos { get; set; }
     }
 }

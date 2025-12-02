@@ -1,5 +1,6 @@
 using jogos.Data;
 using Microsoft.EntityFrameworkCore;
+using jogos.Services; // <--- 1. NÃO ESQUEÇA DESTE USING AQUI EM CIMA
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,11 +12,23 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Controllers
 builder.Services.AddControllers();
 
+// ---> 2. ADICIONE ESTA LINHA AQUI <---
+builder.Services.AddScoped<UploadService>();
+
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocal",
+        p => p.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://127.0.0.1:5500", "http://localhost:5500"));
+});
+
+// ... resto do código igual ...
+
 // CORS (permite front local)
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocal",
-        p => p.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://127.0.0.1:5500","http://localhost:5500"));
+        p => p.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://127.0.0.1:5500", "http://localhost:5500"));
 });
 
 // Swagger
