@@ -10,5 +10,8 @@ namespace jogos.Data
 
         public DbSet<Usuario> Usuarios { get; set; } = default!;
         public DbSet<Jogo> Jogos { get; set; } = default!;
+
+    public DbSet<Comentario> Comentarios { get; set; }
+
     }
 }
