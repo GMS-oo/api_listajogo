@@ -17,14 +17,14 @@ namespace jogos.Controllers
             _context = context;
         }
 
-        // GET api/usuario
+      
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarios()
         {
             return await _context.Usuarios.Include(u => u.Jogos).ToListAsync();
         }
 
-        // GET api/usuario/{id}
+       
         [HttpGet("{id}")]
         public async Task<ActionResult<Usuario>> GetUsuario(int id)
         {
@@ -33,7 +33,7 @@ namespace jogos.Controllers
             return usuario;
         }
 
-        // POST api/usuario (cadastro)
+       
         [HttpPost]
         public async Task<ActionResult<Usuario>> PostUsuario([FromBody] Usuario usuario)
         {
@@ -43,7 +43,7 @@ namespace jogos.Controllers
             return CreatedAtAction(nameof(GetUsuario), new { id = usuario.Id }, usuario);
         }
 
-        // PUT api/usuario/{id}
+       
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuario(int id, [FromBody] Usuario usuario)
         {
@@ -53,7 +53,7 @@ namespace jogos.Controllers
             return NoContent();
         }
 
-        // DELETE api/usuario/{id}
+       
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUsuario(int id)
         {
@@ -64,7 +64,7 @@ namespace jogos.Controllers
             return NoContent();
         }
 
-        // POST api/usuario/login
+      
         [HttpPost("login")]
         public async Task<ActionResult<Usuario>> Login([FromBody] LoginDto dto)
         {

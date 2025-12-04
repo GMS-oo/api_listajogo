@@ -12,7 +12,7 @@ namespace jogos.Controllers
     public class JogosController : ControllerBase
     {
         private readonly AppDbContext _context;
-        // Injeção de dependência do serviço de Upload (FIX necessário)
+     
         private readonly UploadService _uploadService;
 
         public JogosController(AppDbContext context, UploadService uploadService)
@@ -21,15 +21,15 @@ namespace jogos.Controllers
             _uploadService = uploadService;
         }
 
-        // GET api/jogos (Consulta todos os jogos)
+       
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Jogo>>> GetJogos()
         {
-            // Inclui o Usuário para saber quem cadastrou o jogo
+          
             return await _context.Jogos.Include(j => j.Usuario).ToListAsync();
         }
 
-        // GET api/jogos/5 (Consulta jogo por ID)
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<Jogo>> GetJogo(int id)
         {
@@ -38,7 +38,7 @@ namespace jogos.Controllers
             return jogo;
         }
 
-        // POST api/jogos (Cadastra um único jogo)
+      
         [HttpPost]
         public async Task<ActionResult<Jogo>> PostJogo([FromBody] JogoDto dto)
         {
@@ -72,7 +72,7 @@ namespace jogos.Controllers
 
             foreach (var dto in dtos)
             {
-                // Garante que o usuário para quem o jogo está sendo cadastrado exista
+                
                 var usuario = await _context.Usuarios.FindAsync(dto.UsuarioId);
                 if (usuario == null) return BadRequest($"UsuarioId {dto.UsuarioId} não encontrado.");
 
@@ -97,14 +97,14 @@ namespace jogos.Controllers
         }
         // ----------------------------------------------------------------------
 
-        // PUT api/jogos/5 (Atualiza um jogo existente)
+      
         [HttpPut("{id}")]
         public async Task<IActionResult> PutJogo(int id, [FromBody] JogoDto dto)
         {
             var jogo = await _context.Jogos.FindAsync(id);
             if (jogo == null) return NotFound();
 
-            // Lógica de atualização
+           
             jogo.Nome = dto.Nome;
             jogo.Genero = dto.Genero;
             jogo.Plataforma = dto.Plataforma;
@@ -119,7 +119,7 @@ namespace jogos.Controllers
             return NoContent();
         }
 
-        // DELETE api/jogos/5 (Deleta um jogo)
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteJogo(int id)
         {

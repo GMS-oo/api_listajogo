@@ -13,7 +13,7 @@ namespace jogos.Models
         // Caminho ou URL da capa (armazenado no banco)
         public string CapaUrl { get; set; } = string.Empty;
 
-        // FK do usuário dono do jogo
+    
         public int UsuarioId { get; set; }
         public Usuario? Usuario { get; set; }
     }

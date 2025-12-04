@@ -17,7 +17,7 @@ namespace jogos.Models
         public Usuario? Usuario { get; set; } 
 
         public int JogoId { get; set; }
-        [JsonIgnore] // Importante para não dar loop infinito
+        [JsonIgnore] 
         public Jogo? Jogo { get; set; }
     }
 }

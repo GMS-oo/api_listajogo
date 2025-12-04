@@ -16,7 +16,7 @@ namespace jogos.Controllers
             _context = context;
         }
 
-        // Busca comentários de um jogo específico
+        
         [HttpGet("jogo/{jogoId}")]
         public async Task<ActionResult<IEnumerable<Comentario>>> GetComentariosDoJogo(int jogoId)
         {
@@ -27,13 +27,13 @@ namespace jogos.Controllers
                 .ToListAsync();
         }
 
-        // Salva um novo comentário
+
         [HttpPost]
         public async Task<ActionResult<Comentario>> PostComentario(Comentario comentario)
         {
             comentario.DataComentario = DateTime.Now;
 
-            // Verifica se o usuário e o jogo existem antes de salvar
+           
             var usuario = await _context.Usuarios.FindAsync(comentario.UsuarioId);
             var jogo = await _context.Jogos.FindAsync(comentario.JogoId);
 
